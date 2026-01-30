@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-void MaxElement(vector<int> &arr)
+void maxElement(vector<int> &arr)
 {
     int n = arr.size();
     int largest = arr[0];
@@ -13,12 +12,11 @@ void MaxElement(vector<int> &arr)
         }
     }
 
-    cout << "The max Element in this Array is : " << largest << endl;
+    cout << "The Largest Element in Array is : " << largest;
 }
-
 int main()
 {
-    vector<int> arr = {12, 34, 54, 13, 45, 10, 6, 76, 26};
-    MaxElement(arr);
+    vector<int> arr = {12, 45, 76, 98, 32, 17};
+    maxElement(arr);
     return 0;
 }
