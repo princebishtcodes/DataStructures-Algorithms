@@ -19,6 +19,8 @@ int main()
 
     // dq.pop_back() : Removes Element from the last
     dq.pop_back();
+    // dq.pop_front() : Removes Element from front
+    dq.pop_front();
 
     for (auto it : dq)
     {
