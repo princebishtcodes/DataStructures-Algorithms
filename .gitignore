@@ -1,0 +1,11 @@
+#Ignore compiled Binaries
+*.out
+a.out
+
+#Ignore object Files
+*.o
+
+#Ignore executables
+*.exe
+
+build/
