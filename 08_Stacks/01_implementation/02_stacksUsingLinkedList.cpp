@@ -18,11 +18,13 @@ class Stack
 {
 private:
     Node *topNode;
+    int counter;
 
 public:
     Stack()
     {
         topNode = nullptr;
+        counter = 0;
     }
 
     bool isEmpty() const
@@ -35,6 +37,7 @@ public:
         Node *newNode = new Node(value);
         newNode->next = topNode;
         topNode = newNode;
+        counter++;
     }
 
     void pop()
@@ -46,6 +49,7 @@ public:
         Node *temp = topNode;
         topNode = topNode->next;
         delete temp;
+        counter--;
     }
 
     int top() const
@@ -55,6 +59,11 @@ public:
             throw runtime_error("Stack is Empty");
         }
         return topNode->data;
+    }
+
+    int size()
+    {
+        return counter;
     }
 
     void display() const
