@@ -4,17 +4,11 @@ using namespace std;
 int priority(char ch)
 {
     if (ch == '^')
-    {
         return 3;
-    }
-    else if (ch == '*' || ch == '/')
-    {
+    if (ch == '*' || ch == '/')
         return 2;
-    }
-    else if (ch == '+' || ch == '-')
-    {
+    if (ch == '+' || ch == '-')
         return 1;
-    }
     return -1;
 }
 
@@ -22,42 +16,53 @@ string infixToPostfix(string s)
 {
     stack<char> st;
     string ans;
-    int i = 0;
-    while (i < s.size())
+
+    for (int i = 0; i < s.size(); i++)
     {
-        if (s[i] >= 'a' && s[i] <= 'z' || s[i] >= 'A' && s[i] <= 'Z' || s[i] >= '0' && s[i] <= '9')
+        char ch = s[i];
+
+        if ((ch >= 'a' && ch <= 'z') ||
+            (ch >= 'A' && ch <= 'Z') ||
+            (ch >= '0' && ch <= '9'))
         {
-            ans += s[i];
+            ans += ch;
         }
-        else if (s[i] == '(')
+
+        else if (ch == '(')
         {
-            st.push(s[i]);
+            st.push(ch);
         }
-        else if (s[i] == ')')
+
+        else if (ch == ')')
         {
             while (!st.empty() && st.top() != '(')
             {
                 ans += st.top();
                 st.pop();
             }
-            st.pop();
+            if (!st.empty())
+                st.pop();
         }
+
         else
         {
-            while (!st.empty() && priority(s[i]) <= priority(st.top()))
+            while (!st.empty() &&
+                   (priority(ch) < priority(st.top()) ||
+                    (priority(ch) == priority(st.top()) && ch != '^')))
             {
                 ans += st.top();
                 st.pop();
             }
-            st.push(s[i]);
+            st.push(ch);
         }
-        i++;
     }
+
     while (!st.empty())
     {
         ans += st.top();
         st.pop();
     }
+
     return ans;
 }
 
