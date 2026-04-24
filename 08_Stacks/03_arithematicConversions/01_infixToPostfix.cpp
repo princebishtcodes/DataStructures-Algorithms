@@ -16,38 +16,30 @@ string infixToPostfix(string s)
 {
     stack<char> st;
     string ans;
-
     for (int i = 0; i < s.size(); i++)
     {
-        char ch = s[i];
-
-        if ((ch >= 'a' && ch <= 'z') ||
-            (ch >= 'A' && ch <= 'Z') ||
-            (ch >= '0' && ch <= '9'))
+        if ((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z') || (s[i] >= '0' && s[i] <= '9'))
         {
-            ans += ch;
+            ans += s[i];
         }
-
-        else if (ch == '(')
+        else if (s[i] == '(')
         {
-            st.push(ch);
+            st.push(s[i]);
         }
-
-        else if (ch == ')')
+        else if (s[i] == ')')
         {
             while (!st.empty() && st.top() != '(')
             {
                 ans += st.top();
                 st.pop();
             }
-            if (!st.empty())
-                st.pop();
+            st.pop();
         }
-
         else
         {
+            char ch = s[i];
             while (!st.empty() &&
-                   (priority(ch) < priority(st.top()) ||
+                   ((priority(ch) < priority(st.top())) ||
                     (priority(ch) == priority(st.top()) && ch != '^')))
             {
                 ans += st.top();
@@ -62,7 +54,6 @@ string infixToPostfix(string s)
         ans += st.top();
         st.pop();
     }
-
     return ans;
 }
 
